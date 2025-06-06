@@ -1,0 +1,24 @@
+{
+    "name": "ayd/proyecto-final",
+    "description": "Proyecto final de la materia de Análisis y diseño",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "MVC\\": "./",
+            "Controllers\\": "./controllers",
+            "Classes\\" : "./classes"
+        }
+    },
+    "authors": [
+        {
+            "name": "Daniel Noyola",
+            "email": "pepenoyola13@gmail.com"
+        }
+    ],
+    "scripts": {
+        "serve:php": "php -S localhost:3000 -t public/"
+    },
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    }
+}

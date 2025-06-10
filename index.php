@@ -3,11 +3,12 @@
 use Controllers\MainController;
 use MVC\Router;
 
-require_once __DIR__ . '/../includes/app.php';
+require_once __DIR__ . '/includes/app.php';
 
 $router = new Router();
 
-//? Public section
+//? Rutas del sitio 
 $router->get('/', [MainController::class, 'index']);
+$router->get('/test', [MainController::class, 'test']);
 
 $router->checkRoutes();

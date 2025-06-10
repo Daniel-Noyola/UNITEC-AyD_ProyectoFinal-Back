@@ -16,7 +16,7 @@
         }
     ],
     "scripts": {
-        "serve:php": "php -S localhost:3000 -t public/"
+        "serve:php": "php -S localhost:3000"
     },
     "require": {
         "vlucas/phpdotenv": "^5.6"

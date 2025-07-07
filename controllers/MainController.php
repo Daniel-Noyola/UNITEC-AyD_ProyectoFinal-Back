@@ -8,7 +8,6 @@ use MVC\Router;
 class MainController {
     public static function index(Router $router)
     {
-        $db = DB::connect();
 
         $router->render('main/index');
     }

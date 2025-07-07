@@ -47,7 +47,6 @@ class Router
         }
 
         ob_start(); 
-
         include_once __DIR__ . "/views/$view.php";
         $content = ob_get_clean(); // Limpia el Buffer y guarda el contenido en una variable
         include_once __DIR__ . '/views/templates/layout.php';

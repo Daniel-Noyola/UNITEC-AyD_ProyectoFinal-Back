@@ -8,7 +8,7 @@ use PDOException;
 class DB {
     private static ?PDO $instance = null;
 
-    public static function connect()
+    public static function connect(): PDO
     {
         if (self::$instance !== null) return self::$instance;
 

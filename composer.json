@@ -6,7 +6,8 @@
         "psr-4": {
             "MVC\\": "./",
             "Controllers\\": "./controllers",
-            "Classes\\" : "./classes"
+            "Classes\\" : "./classes",
+            "Middleware\\": "./middleware"
         }
     },
     "authors": [

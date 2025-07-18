@@ -8,6 +8,6 @@ use MVC\Router;
 class MainController {
     public static function index(Router $router)
     {
-
+        echo("Desde el server");
     }
 }

@@ -7,8 +7,7 @@ require_once __DIR__ . '/../includes/app.php';
 
 $router = new Router();
 
-//? Rutas del sitio 
-$router->get('/', [MainController::class, 'index']);
-$router->get('/test', [MainController::class, 'test']);
+//? Rutas de la API 
+$router->get('/api', [MainController::class, 'index']);
 
 $router->checkRoutes();

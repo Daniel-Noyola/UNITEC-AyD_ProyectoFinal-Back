@@ -9,5 +9,7 @@ require __DIR__ . '/../vendor/autoload.php';
 $dotenv = Dotenv::createImmutable(__DIR__);
 $dotenv->safeLoad();
 
+require __DIR__ . '/cors.php';
+
 //Validación de Api key
 AuthMiddleware::validate();

@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: tu-api-php # Nombre de tu servicio en Render
+    env: php # Tipo de entorno (Render detectará automáticamente PHP)
+    plan: free # Plan gratuito
+    repo: https://github.com/tu-usuario/tu-repositorio # Reemplaza con tu URL de GitHub/GitLab
+    branch: main # O la rama que uses (ej. master, develop)
+    buildCommand: "composer install --no-dev" # Comando para instalar dependencias
+    startCommand: "php -S 0.0.0.0:$PORT -t public" # Comando para iniciar el servidor web
+    healthCheckPath: /api/saludo # O una ruta que siempre responda 200 OK para verificar que la API está viva
+    envVars:
+      # Aquí puedes definir tus variables de entorno para Render
+      - key: DB_HOST
+        value: mnz.domcloud.co
+      - key: DB_USER
+        value: ayd-riskmap-api # Si usas una BD externa
+      - key: DB_PASS
+        value: 6ciz3VcLW27P9Zs))(
+      - key: DB_NAME
+        value: ayd_riskmap_api_db
+      - key: API_KEY
+        value: my_api_key_8086
+      - key: CORS_ALLOWED_ORIGINS
+        value: http://localhost:5173
+        sync: false # No sincronizar el valor en el UI, se ingresa solo al crear

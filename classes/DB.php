@@ -28,6 +28,7 @@ class DB {
             return self::$instance;
         } 
         catch (PDOException $e) {
+            http_response_code(500);
             die("Error de conexión: " . $e->getMessage());
         }
     }

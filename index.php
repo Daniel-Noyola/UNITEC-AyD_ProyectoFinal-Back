@@ -1,5 +1,6 @@
 <?php
 
+use Controllers\IncidentsController;
 use Controllers\MainController;
 use MVC\Router;
 
@@ -9,6 +10,6 @@ $router = new Router();
 
 //? Rutas de la API 
 $router->get('/', [MainController::class, 'index']);
-$router->get('/test', [MainController::class, 'test']);
+$router->get('/incidents', [IncidentsController::class, 'index']);
 
 $router->checkRoutes();

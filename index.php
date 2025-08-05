@@ -11,5 +11,6 @@ $router = new Router();
 //? Rutas de la API 
 $router->get('/', [MainController::class, 'index']);
 $router->get('/incidents', [IncidentsController::class, 'index']);
+$router->post('/incidents/store', [IncidentsController::class, 'store']);
 
 $router->checkRoutes();

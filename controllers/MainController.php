@@ -10,9 +10,4 @@ class MainController {
     {
         echo("Desde el server");
     }
-
-    public static function test()
-    {
-        echo("Otra Url XD");
-    }
 }

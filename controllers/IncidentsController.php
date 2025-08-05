@@ -27,4 +27,43 @@ class IncidentsController {
         http_response_code(200);
         echo json_encode($res, JSON_UNESCAPED_UNICODE);
     }
+
+    public static function store()
+{
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        $input = file_get_contents("php://input");
+        $data = json_decode($input, true);
+
+        $db = DB::connect();
+
+        // Sentencia SQL con parámetros
+        $sql = "INSERT INTO incidents (title, description, direction, latitude, longitude, category_id, user_id) 
+                VALUES (:title, :description, :direction, :latitude, :longitude, :category_id, :user_id)";
+
+        // Preparar la consulta
+        $stmt = $db->prepare($sql);
+
+        // Valores a insertar
+        $data = [
+            ':title' => $data["title"],
+            ':description' => $data["description"],
+            ':direction' => $data["direction"],
+            ':latitude' => $data["latitude"],
+            ':longitude' => $data["longitude"],
+            ':category_id' => $data["category_id"],
+            ':user_id' => null
+        ];
+
+        // Ejecutar
+        if ($stmt->execute($data)) {
+            http_response_code(201);
+            echo json_encode(["message"=> "Guardado con exito"]);
+        } else {
+            http_response_code(500);
+            echo json_encode(["message"=> "Error al guardar el registro"]);
+        }
+
+    }
+}
+
 }

@@ -44,7 +44,7 @@ class IncidentsController {
         $stmt = $db->prepare($sql);
 
         // Valores a insertar
-        $data = [
+        $params = [
             ':title' => $data["title"],
             ':description' => $data["description"],
             ':direction' => $data["direction"],
@@ -55,7 +55,7 @@ class IncidentsController {
         ];
 
         // Ejecutar
-        if ($stmt->execute($data)) {
+        if ($stmt->execute($params)) {
             http_response_code(201);
             echo json_encode(["message"=> "Guardado con exito"]);
         } else {

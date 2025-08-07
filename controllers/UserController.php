@@ -52,6 +52,29 @@ class UserController
 
     public static function login()
     {
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            $input = file_get_contents("php://input");
+            $data = json_decode($input, true);
 
+            $db = DB::connect();
+
+            // Buscar usuario por email
+            $sql = 'SELECT * FROM users WHERE email = :email';
+            $stmt = $db->prepare($sql);
+            $stmt->execute([':email' => $data["email"]]);
+            $user = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+            if ($user && password_verify($data["password"], $user["password"])) {
+                http_response_code(200);
+                echo json_encode([
+                    "id" => $user["id"],
+                    "name" => $user["name"],
+                    "email" => $user["email"]
+                ]);
+            } else {
+                http_response_code(401);
+                echo json_encode(["message" => "Credenciales incorrectas"]);
+            }
+        }
     }
 }

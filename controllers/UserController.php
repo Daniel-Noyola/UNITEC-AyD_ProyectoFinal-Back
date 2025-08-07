@@ -3,6 +3,7 @@
 namespace Controllers;
 
 use Classes\DB;
+use PDO;
 
 class UserController 
 {
@@ -62,7 +63,7 @@ class UserController
             $sql = 'SELECT * FROM users WHERE email = :email';
             $stmt = $db->prepare($sql);
             $stmt->execute([':email' => $data["email"]]);
-            $user = $stmt->fetch(\PDO::FETCH_ASSOC);
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($user && password_verify($data["password"], $user["password"])) {
                 http_response_code(200);

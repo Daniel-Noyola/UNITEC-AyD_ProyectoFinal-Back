@@ -28,8 +28,28 @@ class IncidentsController {
         echo json_encode($res, JSON_UNESCAPED_UNICODE);
     }
 
+    public static function incidentsById()
+    {
+        if (!isset($_GET['user_id'])){
+            http_response_code(400);
+            echo json_encode(["message" => "Error en la peticion"]);
+            return;
+        }
+
+        $db = DB::connect();
+        $query = "SELECT * FROM incidents WHERE user_id = :user_id";
+
+        $stmt = $db->prepare($query);
+        $stmt->execute([":user_id" => $_GET['user_id']]);
+
+        $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        http_response_code(200);
+        echo json_encode($res, JSON_UNESCAPED_UNICODE);
+    }
+
     public static function store()
-{
+    {
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $input = file_get_contents("php://input");
         $data = json_decode($input, true);

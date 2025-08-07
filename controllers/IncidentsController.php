@@ -71,7 +71,7 @@ class IncidentsController {
             ':latitude' => $data["latitude"],
             ':longitude' => $data["longitude"],
             ':category_id' => $data["category_id"],
-            ':user_id' => null
+            ':user_id' => $data["user_id"] ?? null
         ];
 
         // Ejecutar

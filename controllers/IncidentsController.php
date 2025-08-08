@@ -10,7 +10,7 @@ class IncidentsController {
     public static function index()
     {
         $db = DB::connect();
-        $query = "SELECT * FROM incidents";
+        $query = "SELECT incidents.*, users.name AS user_name FROM incidents LEFT JOIN users ON incidents.user_id = users.id";
 
         $stmt = $db->prepare($query);
         $stmt->execute();
@@ -24,7 +24,7 @@ class IncidentsController {
                 'longitude' => (float) $row['longitude']
             ];
         }, $res);
-        
+
         http_response_code(200);
         echo json_encode($res, JSON_UNESCAPED_UNICODE);
     }

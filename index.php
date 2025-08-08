@@ -15,6 +15,8 @@ $router->get('/incidents', [IncidentsController::class, 'index']);
 $router->get('/incidents/id', [IncidentsController::class, 'incidentsById']);
 $router->post('/incidents/store', [IncidentsController::class, 'store']);
 
+$router->get('/categories', [IncidentsController::class, 'categories']);
+
 $router->post('/user/store', [UserController::class, 'store']);
 $router->post('/user/login', [UserController::class, 'login']);
 

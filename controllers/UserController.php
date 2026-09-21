@@ -13,6 +13,12 @@ class UserController
             $input = file_get_contents("php://input");
             $data = json_decode($input, true);
 
+            if (!is_array($data) || empty($data['name']) || empty($data['email']) || empty($data['password'])) {
+                http_response_code(400);
+                echo json_encode(["message" => "Datos incompletos"]);
+                return;
+            }
+
             $db = DB::connect();
 
             // Verificar si el email ya existe
@@ -56,6 +62,12 @@ class UserController
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $input = file_get_contents("php://input");
             $data = json_decode($input, true);
+
+            if (!is_array($data) || empty($data['email']) || empty($data['password'])) {
+                http_response_code(400);
+                echo json_encode(["message" => "Credenciales requeridas"]);
+                return;
+            }
 
             $db = DB::connect();
 

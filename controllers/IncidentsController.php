@@ -55,6 +55,12 @@ class IncidentsController {
             $input = file_get_contents("php://input");
             $data = json_decode($input, true);
 
+            if (!is_array($data) || empty($data["title"]) || empty($data["description"])) {
+                http_response_code(400);
+                echo json_encode(["message" => "Datos incompletos"]);
+                return;
+            }
+
             $db = DB::connect();
 
             // Sentencia SQL con parámetros

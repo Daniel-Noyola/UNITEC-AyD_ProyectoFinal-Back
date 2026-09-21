@@ -12,24 +12,23 @@ class DB {
     {
         if (self::$instance !== null) return self::$instance;
 
-        $host = $_ENV['DB_HOST'] ?? '';
-        $dbname = $_ENV['DB_NAME'] ?? '';
-        $port = $_ENV['DB_PORT'] ?? '3306';
-        $user = $_ENV['DB_USER'] ?? '';
-        $pass = $_ENV['DB_PASS'] ?? '';
+        $host = $_ENV['DB_HOST'] ?? getenv('DB_HOST') ?: '';
+        $dbname = $_ENV['DB_NAME'] ?? getenv('DB_NAME') ?: '';
+        $port = $_ENV['DB_PORT'] ?? getenv('DB_PORT') ?: '3306';
+        $user = $_ENV['DB_USER'] ?? getenv('DB_USER') ?: '';
+        $pass = $_ENV['DB_PASS'] ?? getenv('DB_PASS') ?: '';
 
         $dsn = "mysql:host={$host};dbname={$dbname};port={$port}";
 
-        try
-        {
+        try {
             self::$instance = new PDO($dsn, $user, $pass, [
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
             ]);
             return self::$instance;
-        } 
-        catch (PDOException $e) {
+        } catch (PDOException $e) {
             http_response_code(500);
-            die("Error de conexión: " . $e->getMessage());
+            echo json_encode(["message" => "Error de conexión a la base de datos"]);
+            exit();
         }
     }
 }

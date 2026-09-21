@@ -18,7 +18,7 @@ class DB {
         $user = $_ENV['DB_USER'] ?? getenv('DB_USER') ?: '';
         $pass = $_ENV['DB_PASS'] ?? getenv('DB_PASS') ?: '';
 
-        $dsn = "mysql:host={$host};dbname={$dbname};port={$port}";
+        $dsn = "mysql:host={$host};dbname={$dbname};port={$port};charset=utf8mb4";
 
         try {
             self::$instance = new PDO($dsn, $user, $pass, [

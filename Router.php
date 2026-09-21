@@ -20,11 +20,15 @@ class Router
         $this->postRoutes[$url] = $fn;
     }
 
-    public function checkRoutes()
+    public function checkRoutes(): void
     {
+        $requestUri = strtok($_SERVER['REQUEST_URI'] ?? '/', '?') ?: '/';
 
-        $currentUrl = strtok($_SERVER['REQUEST_URI'], '?') ?? '/';
-        $method = $_SERVER['REQUEST_METHOD'];
+        // Eliminar prefijo /api si está presente en la solicitud
+        $currentUrl = preg_replace('#^/api(?=/|$)#', '', $requestUri);
+        $currentUrl = empty($currentUrl) ? '/' : $currentUrl;
+
+        $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
 
         if ($method === 'GET') {
             $fn = $this->getRoutes[$currentUrl] ?? null;
@@ -32,11 +36,11 @@ class Router
             $fn = $this->postRoutes[$currentUrl] ?? null;
         }
 
-        if ( $fn ) {
+        if ($fn) {
             call_user_func($fn, $this);
         } else {
             http_response_code(404);
-            return;
+            echo json_encode(["message" => "Ruta no encontrada"]);
         }
     }
 
